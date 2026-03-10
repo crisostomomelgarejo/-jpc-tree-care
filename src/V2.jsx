@@ -367,7 +367,7 @@ export default function App() {
           </div>
 
           <div className="h2" style={{ display: "flex", alignItems: "center", gap: 32, marginBottom: 24, flexWrap: "wrap" }}>
-            <Logo height={100} darkBg={true} iconOnly={false} />
+            <Logo height={150} darkBg={true} iconOnly={false} />
             <h1 className="baskerville" style={{ fontSize: "clamp(48px, 8vw, 98px)", color: "white", lineHeight: 0.95, margin: 0, maxWidth: 600 }}>
               {t.hero.h1a}<br /><em style={{ color: B.greenAccent, fontStyle: "italic" }}>{t.hero.h1b}</em>
             </h1>
