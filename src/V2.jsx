@@ -197,7 +197,7 @@ function Logo({ height = 44, darkBg = false, iconOnly = false }) {
           alt="JPC Tree Care Icon"
           style={{ height, width: height, objectFit: "contain", transition: "all 0.3s ease" }}
         />
-        <span style={{ fontFamily: "Outfit", fontWeight: 800, fontSize: "clamp(15px, 4vw, 18px)", color: darkBg ? "white" : B.brown, transition: "color 0.3s ease", whiteSpace: "nowrap", letterSpacing: "-0.01em" }}>JPC TREE CARE</span>
+        <span style={{ fontFamily: "Outfit", fontWeight: 800, fontSize: "clamp(15px, 4vw, 18px)", color: darkBg ? "white" : B.brown, transition: "color 0.3s ease", whiteSpace: "nowrap", letterSpacing: "-0.01em" }}>JPC TREE CARE LLC</span>
       </div>
     );
   }
