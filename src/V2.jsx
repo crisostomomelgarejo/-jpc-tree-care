@@ -185,17 +185,30 @@ function Fade({ children, className = "", delay = 0, style = {} }) {
 }
 
 // ─── LOGO COMPONENT ─────────────────────────────────────
-// Nota: Reemplaza la URL src por el enlace real del logo de JPC cuando lo subas al servidor.
-function Logo({ height = 44, darkBg = false }) {
+// Nota: Reemplaza las URLs (logo-icon.png y logo-full.png) por los nombres reales de tus archivos.
+function Logo({ height = 44, darkBg = false, iconOnly = false }) {
+  if (iconOnly) {
+    return (
+      <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        {/* 🚨 TODO: REPLACE "/logo-icon.png" WITH YOUR SQUARE ICON 🚨 */}
+        <img
+          src="/logo-icon.png"
+          alt="JPC Tree Care Icon"
+          style={{ height, width: height, objectFit: "contain", filter: darkBg ? "brightness(0) invert(1)" : "none", background: "rgba(139,195,74,0.3)", borderRadius: 8 }}
+        />
+        <span className="desk-only" style={{ fontFamily: "Outfit", fontWeight: 800, fontSize: 18, color: darkBg ? "white" : B.brown }}>JPC TREE CARE</span>
+      </div>
+    );
+  }
+
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-      {/* 🚨 TODO: REPLACE "/logo.png" WITH YOUR ACTUAL LOGO FILE PATH HERE 🚨 */}
+      {/* 🚨 TODO: REPLACE "/logo-full.png" WITH YOUR FULL RECTANGULAR LOGO 🚨 */}
       <img
-        src="/logo.png"
+        src="/logo-full.png"
         alt="JPC Tree Care LLC"
-        style={{ height, width: "auto", objectFit: "contain", filter: darkBg ? "brightness(0) invert(1)" : "none", background: "rgba(139,195,74,0.3)" }}
+        style={{ height, width: "auto", objectFit: "contain", filter: darkBg ? "brightness(0) invert(1)" : "none", background: "rgba(255,255,255,0.8)", borderRadius: 8, padding: 4 }}
       />
-      <span style={{ fontFamily: "Outfit", fontWeight: 800, fontSize: 18, color: darkBg ? "white" : B.brown }}>JPC TREE CARE</span>
     </div>
   );
 }
@@ -312,7 +325,7 @@ export default function App() {
       {/* STICKY HEADER */}
       <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: scrolled ? "rgba(250,250,247,0.96)" : "transparent", backdropFilter: scrolled ? "blur(14px)" : "none", borderBottom: scrolled ? `1px solid rgba(74,44,10,0.08)` : "none", boxShadow: scrolled ? "0 2px 24px rgba(74,44,10,0.07)" : "none", transition: "all 0.3s ease" }}>
         <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 clamp(16px, 4vw, 24px)", height: 72, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <Logo height={scrolled ? 42 : 46} darkBg={!scrolled} />
+          <Logo height={scrolled ? 42 : 46} darkBg={!scrolled} iconOnly={true} />
 
           <div className="desk-only" style={{ display: "flex", alignItems: "center", gap: 10 }}>
             <button onClick={() => scrollTo("services")} style={{ background: "none", border: "none", cursor: "pointer", color: scrolled ? B.textMuted : "rgba(255,255,255,0.75)", fontSize: 14, fontFamily: "'Outfit',sans-serif", fontWeight: 500, padding: "6px 10px" }}>{t.nav.estimate === "Free Estimate" ? "Services" : "Servicios"}</button>
@@ -353,9 +366,14 @@ export default function App() {
             <span className="outfit" style={{ color: "rgba(255,255,255,0.8)", fontSize: 13, fontWeight: 500 }}>{t.hero.eyebrow}</span>
           </div>
 
-          <h1 className="h2 baskerville" style={{ fontSize: "clamp(58px, 10vw, 118px)", color: "white", lineHeight: 0.95, margin: "0 0 24px", maxWidth: 720 }}>
-            {t.hero.h1a}<br /><em style={{ color: B.greenAccent, fontStyle: "italic" }}>{t.hero.h1b}</em>
-          </h1>
+          <div className="h2" style={{ display: "flex", flexDirection: "column", gap: 20, marginBottom: 24 }}>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <Logo height={120} darkBg={true} iconOnly={false} />
+            </div>
+            <h1 className="baskerville" style={{ fontSize: "clamp(48px, 8vw, 98px)", color: "white", lineHeight: 0.95, margin: 0, maxWidth: 720 }}>
+              {t.hero.h1a}<br /><em style={{ color: B.greenAccent, fontStyle: "italic" }}>{t.hero.h1b}</em>
+            </h1>
+          </div>
 
           <p className="h3 outfit" style={{ color: "rgba(255,255,255,0.78)", fontSize: "clamp(16px, 2vw, 20px)", lineHeight: 1.55, marginBottom: 38, maxWidth: 520 }}>{t.hero.sub}</p>
 
