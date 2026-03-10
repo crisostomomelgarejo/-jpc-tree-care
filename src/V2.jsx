@@ -366,11 +366,9 @@ export default function App() {
             <span className="outfit" style={{ color: "rgba(255,255,255,0.8)", fontSize: 13, fontWeight: 500 }}>{t.hero.eyebrow}</span>
           </div>
 
-          <div className="h2" style={{ display: "flex", flexDirection: "column", gap: 20, marginBottom: 24 }}>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <Logo height={120} darkBg={true} iconOnly={false} />
-            </div>
-            <h1 className="baskerville" style={{ fontSize: "clamp(48px, 8vw, 98px)", color: "white", lineHeight: 0.95, margin: 0, maxWidth: 720 }}>
+          <div className="h2" style={{ display: "flex", alignItems: "center", gap: 32, marginBottom: 24, flexWrap: "wrap" }}>
+            <Logo height={100} darkBg={true} iconOnly={false} />
+            <h1 className="baskerville" style={{ fontSize: "clamp(48px, 8vw, 98px)", color: "white", lineHeight: 0.95, margin: 0, maxWidth: 600 }}>
               {t.hero.h1a}<br /><em style={{ color: B.greenAccent, fontStyle: "italic" }}>{t.hero.h1b}</em>
             </h1>
           </div>
