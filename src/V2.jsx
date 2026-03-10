@@ -176,7 +176,8 @@ function Fade({ children, className = "", delay = 0, style = {} }) {
     <div ref={ref} className={className} style={{
       opacity: vis ? 1 : 0,
       transform: vis ? "translateY(0)" : "translateY(24px)",
-      transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
+      WebkitTransform: vis ? "translateY(0)" : "translateY(24px)",
+      transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms, -webkit-transform 0.6s ease ${delay}ms`,
       ...style,
     }}>
       {children}
@@ -252,8 +253,9 @@ export default function App() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
+          -webkit-appearance: none;
         }
-        .btn-cta:hover { background: ${B.brownLight}; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(74,44,10,0.38); }
+        .btn-cta:hover { background: ${B.brownLight}; transform: translateY(-2px); -webkit-transform: translateY(-2px); box-shadow: 0 8px 28px rgba(74,44,10,0.38); }
 
         .btn-green {
           background: ${B.greenDark};
@@ -284,14 +286,15 @@ export default function App() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
+          -webkit-appearance: none;
         }
         .btn-ghost:hover { border-color: white; background: rgba(255,255,255,0.1); }
 
-        .svc-card { transition: all 0.22s ease; cursor: default; }
-        .svc-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(74,44,10,0.12) !important; }
+        .svc-card { transition: transform 0.22s ease, -webkit-transform 0.22s ease, box-shadow 0.22s ease; cursor: default; }
+        .svc-card:hover { transform: translateY(-5px); -webkit-transform: translateY(-5px); box-shadow: 0 20px 50px rgba(74,44,10,0.12) !important; }
 
         .pill { transition: all 0.15s ease; cursor: default; }
-        .pill:hover { background: ${B.greenDark} !important; color: white !important; border-color: ${B.greenDark} !important; transform: scale(1.04); }
+        .pill:hover { background: ${B.greenDark} !important; color: white !important; border-color: ${B.greenDark} !important; transform: scale(1.04); -webkit-transform: scale(1.04); }
 
         .lang-btn {
           font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 13px;
@@ -303,27 +306,30 @@ export default function App() {
           font-family: 'Outfit', sans-serif; background: rgba(255,255,255,0.06); color: white;
           border: 1.5px solid rgba(255,255,255,0.15); border-radius: 8px; padding: 13px 16px;
           font-size: 15px; width: 100%; transition: border-color 0.2s, box-shadow 0.2s;
+          -webkit-appearance: none;
         }
         input:focus, select:focus, textarea:focus { outline: none; border-color: ${B.greenAccent}; box-shadow: 0 0 0 3px rgba(139,195,74,0.15); }
-        input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35); }
+        input::placeholder, textarea::placeholder { color: rgba(255,255,255,0.35); opacity: 1; }
         select option { background: ${B.brownDark}; color: white; }
 
-        @keyframes heroIn { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
-        .h1 { animation: heroIn 0.9s ease 0.1s both; }
-        .h2 { animation: heroIn 0.9s ease 0.3s both; }
-        .h3 { animation: heroIn 0.9s ease 0.5s both; }
-        .h4 { animation: heroIn 0.9s ease 0.65s both; }
-        .h5 { animation: heroIn 0.9s ease 0.8s both; }
+        @-webkit-keyframes heroIn { from { opacity:0; -webkit-transform:translateY(32px); transform:translateY(32px); } to { opacity:1; -webkit-transform:translateY(0); transform:translateY(0); } }
+        @keyframes heroIn { from { opacity:0; -webkit-transform:translateY(32px); transform:translateY(32px); } to { opacity:1; -webkit-transform:translateY(0); transform:translateY(0); } }
+        .h1 { -webkit-animation: heroIn 0.9s ease 0.1s both; animation: heroIn 0.9s ease 0.1s both; }
+        .h2 { -webkit-animation: heroIn 0.9s ease 0.3s both; animation: heroIn 0.9s ease 0.3s both; }
+        .h3 { -webkit-animation: heroIn 0.9s ease 0.5s both; animation: heroIn 0.9s ease 0.5s both; }
+        .h4 { -webkit-animation: heroIn 0.9s ease 0.65s both; animation: heroIn 0.9s ease 0.65s both; }
+        .h5 { -webkit-animation: heroIn 0.9s ease 0.8s both; animation: heroIn 0.9s ease 0.8s both; }
 
+        @-webkit-keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
-        .blink { animation: blink 2.2s ease infinite; }
+        .blink { -webkit-animation: blink 2.2s ease infinite; animation: blink 2.2s ease infinite; }
 
         @media (max-width: 768px) { .desk-only { display: none !important; } }
         @media (min-width: 769px) { .mob-only { display: none !important; } }
       `}</style>
 
       {/* STICKY HEADER */}
-      <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: scrolled ? "rgba(250,250,247,0.96)" : "transparent", backdropFilter: scrolled ? "blur(14px)" : "none", borderBottom: scrolled ? `1px solid rgba(74,44,10,0.08)` : "none", boxShadow: scrolled ? "0 2px 24px rgba(74,44,10,0.07)" : "none", transition: "all 0.3s ease" }}>
+      <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: scrolled ? "rgba(250,250,247,0.96)" : "transparent", backdropFilter: scrolled ? "blur(14px)" : "none", WebkitBackdropFilter: scrolled ? "blur(14px)" : "none", borderBottom: scrolled ? `1px solid rgba(74,44,10,0.08)` : "none", boxShadow: scrolled ? "0 2px 24px rgba(74,44,10,0.07)" : "none", transition: "all 0.3s ease" }}>
         <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 clamp(16px, 4vw, 24px)", height: 72, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Logo height={scrolled ? 42 : 46} darkBg={!scrolled} iconOnly={true} />
 
