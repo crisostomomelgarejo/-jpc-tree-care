@@ -190,13 +190,13 @@ function Logo({ height = 44, darkBg = false, iconOnly = false }) {
   if (iconOnly) {
     return (
       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-        {/* 🚨 TODO: REPLACE "/logo-icon.png" WITH YOUR SQUARE ICON 🚨 */}
+        {/* 🚨 ESTOS SON LOS DOS ICONOS QUE CAMBIAN AL BAJAR 🚨 */}
         <img
-          src="/logo-icon.png"
+          src={darkBg ? "/logo-icon-blanco.png" : "/logo-icon-color.png"}
           alt="JPC Tree Care Icon"
-          style={{ height, width: height, objectFit: "contain", filter: darkBg ? "brightness(0) invert(1)" : "none", background: "rgba(139,195,74,0.3)", borderRadius: 8 }}
+          style={{ height, width: height, objectFit: "contain", transition: "all 0.3s ease" }}
         />
-        <span className="desk-only" style={{ fontFamily: "Outfit", fontWeight: 800, fontSize: 18, color: darkBg ? "white" : B.brown }}>JPC TREE CARE</span>
+        <span className="desk-only" style={{ fontFamily: "Outfit", fontWeight: 800, fontSize: 18, color: darkBg ? "white" : B.brown, transition: "color 0.3s ease" }}>JPC TREE CARE</span>
       </div>
     );
   }
