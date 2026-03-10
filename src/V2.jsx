@@ -311,7 +311,7 @@ export default function App() {
 
       {/* STICKY HEADER */}
       <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: scrolled ? "rgba(250,250,247,0.96)" : "transparent", backdropFilter: scrolled ? "blur(14px)" : "none", borderBottom: scrolled ? `1px solid rgba(74,44,10,0.08)` : "none", boxShadow: scrolled ? "0 2px 24px rgba(74,44,10,0.07)" : "none", transition: "all 0.3s ease" }}>
-        <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 24px", height: 72, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ maxWidth: 1120, margin: "0 auto", padding: "0 clamp(16px, 4vw, 24px)", height: 72, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Logo height={scrolled ? 42 : 46} darkBg={!scrolled} />
 
           <div className="desk-only" style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -347,7 +347,7 @@ export default function App() {
           <div style={{ position: "absolute", inset: 0, background: `linear-gradient(135deg, rgba(26,14,4,0.9) 0%, rgba(27,94,47,0.75) 55%, rgba(12,8,3,0.92) 100%)` }} />
         </div>
 
-        <div style={{ position: "relative", zIndex: 10, maxWidth: 1120, margin: "0 auto", padding: "130px 24px 90px", width: "100%" }}>
+        <div style={{ position: "relative", zIndex: 10, maxWidth: 1120, margin: "0 auto", padding: "clamp(100px, 15vw, 140px) clamp(16px, 4vw, 24px) clamp(60px, 10vw, 90px)", width: "100%" }}>
           <div className="h1" style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "rgba(255,255,255,0.07)", border: "1px solid rgba(139,195,74,0.25)", borderRadius: 100, padding: "6px 16px", marginBottom: 28 }}>
             <span className="blink" style={{ width: 7, height: 7, borderRadius: "50%", background: B.greenAccent, display: "inline-block" }} />
             <span className="outfit" style={{ color: "rgba(255,255,255,0.8)", fontSize: 13, fontWeight: 500 }}>{t.hero.eyebrow}</span>
@@ -388,7 +388,7 @@ export default function App() {
       </section>
 
       {/* SERVICES */}
-      <section id="services" style={{ padding: "100px 24px", background: B.offWhite }}>
+      <section id="services" style={{ padding: "clamp(60px, 10vw, 100px) clamp(16px, 4vw, 24px)", background: B.offWhite }}>
         <div style={{ maxWidth: 1120, margin: "0 auto" }}>
           <Fade>
             <div style={{ marginBottom: 60 }}>
@@ -426,7 +426,7 @@ export default function App() {
       </section>
 
       {/* WHY CHOOSE JPC */}
-      <section style={{ padding: "80px 24px", background: B.lightGray }}>
+      <section style={{ padding: "clamp(50px, 8vw, 80px) clamp(16px, 4vw, 24px)", background: B.lightGray }}>
         <div style={{ maxWidth: 1120, margin: "0 auto" }}>
           <Fade><h2 className="baskerville" style={{ fontSize: "clamp(26px, 4vw, 42px)", textAlign: "center", marginBottom: 50, color: B.brown }}>{t.why.title}</h2></Fade>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 18 }}>
@@ -446,7 +446,7 @@ export default function App() {
       </section>
 
       {/* PORTFOLIO GALLERY */}
-      <section id="work" style={{ padding: "100px 24px", background: B.offWhite }}>
+      <section id="work" style={{ padding: "clamp(60px, 10vw, 100px) clamp(16px, 4vw, 24px)", background: B.offWhite }}>
         <div style={{ maxWidth: 1120, margin: "0 auto" }}>
           <Fade>
             <div style={{ marginBottom: 48 }}>
@@ -466,7 +466,7 @@ export default function App() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section id="testimonials" style={{ padding: "96px 24px", background: B.lightGray }}>
+      <section id="testimonials" style={{ padding: "clamp(60px, 10vw, 96px) clamp(16px, 4vw, 24px)", background: B.lightGray }}>
         <div style={{ maxWidth: 1120, margin: "0 auto" }}>
           <Fade>
             <div style={{ textAlign: "center", marginBottom: 52 }}>
@@ -497,7 +497,7 @@ export default function App() {
       </section>
 
       {/* SERVICE AREAS */}
-      <section id="areas" style={{ padding: "80px 24px", background: B.offWhite }}>
+      <section id="areas" style={{ padding: "clamp(50px, 8vw, 80px) clamp(16px, 4vw, 24px)", background: B.offWhite }}>
         <div style={{ maxWidth: 1120, margin: "0 auto", textAlign: "center" }}>
           <Fade>
             <span className="outfit" style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", color: B.greenDark, textTransform: "uppercase" }}>Coverage</span>
@@ -514,9 +514,9 @@ export default function App() {
       </section>
 
       {/* CONTACT / LEAD FORM */}
-      <section id="contact" style={{ padding: "100px 24px", background: B.brownDark, position: "relative", overflow: "hidden" }}>
+      <section id="contact" style={{ padding: "clamp(60px, 10vw, 100px) clamp(16px, 4vw, 24px)", background: B.brownDark, position: "relative", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `radial-gradient(ellipse at 85% 15%, rgba(27,94,47,0.35) 0%, transparent 55%), radial-gradient(ellipse at 5% 90%, rgba(139,195,74,0.08) 0%, transparent 45%)`, pointerEvents: "none" }} />
-        <div style={{ maxWidth: 1120, margin: "0 auto", position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: 60, alignItems: "center" }}>
+        <div style={{ maxWidth: 1120, margin: "0 auto", position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "clamp(30px, 8vw, 60px)", alignItems: "center" }}>
           <Fade>
             <div>
               <span className="outfit" style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.18em", color: B.greenAccent, textTransform: "uppercase" }}>Contact</span>
