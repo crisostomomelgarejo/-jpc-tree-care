@@ -203,11 +203,11 @@ function Logo({ height = 44, darkBg = false, iconOnly = false }) {
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-      {/* 🚨 TODO: REPLACE "/logo-full.png" WITH YOUR FULL RECTANGULAR LOGO 🚨 */}
+      {/* 🚨 REEMPLAZA "/logo-full.png" CON TU IMAGEN COMPLETA REAL 🚨 */}
       <img
         src="/logo-full.png"
         alt="JPC Tree Care LLC"
-        style={{ height, width: "auto", objectFit: "contain", filter: darkBg ? "brightness(0) invert(1)" : "none", background: "rgba(255,255,255,0.8)", borderRadius: 8, padding: 4 }}
+        style={{ height, width: "auto", objectFit: "contain", background: "rgba(255,255,255,0.8)", borderRadius: 8, padding: 4 }}
       />
     </div>
   );
