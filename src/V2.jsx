@@ -214,13 +214,22 @@ function Logo({ height = 44, darkBg = false, iconOnly = false }) {
   );
 }
 
+
 // ─── APP ──────────────────────────────────────────────────────────────────────
 export default function App() {
   const [lang, setLang] = useState("en");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const t = T[lang];
+
+  // Form State
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    service: ""
+  });
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60);
@@ -229,6 +238,36 @@ export default function App() {
   }, []);
 
   const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false); };
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxscLn-zWAQ3j1NaRAwTb8PJ_4Ecq0eaPBOczGX_MOBMBTTl9YZdZUXyiT2J73UiCk5qw/exec";
+
+    try {
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Crucial para evitar bloqueos de Google
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: formData.name,
+          telefono: formData.phone,
+          servicio: formData.service
+        })
+      });
+      // El modo no-cors no da respuesta legible, asumimos éxito si la red no falla
+      setSubmitted(true);
+      setFormData({ name: "", phone: "", service: "" });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert(lang === "en" ? "Connection error. Please try calling us." : "Error de conexión. Por favor, llámanos.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div style={{ fontFamily: "'Libre Baskerville', Georgia, serif", color: B.text, overflowX: "hidden", background: B.offWhite }}>
@@ -550,11 +589,15 @@ export default function App() {
                   <p className="outfit" style={{ color: "white", fontWeight: 600, fontSize: 17 }}>{t.form.sent}</p>
                 </div>
               ) : (
-                <form onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }} style={{ display: "flex", flexDirection: "column", gap: 13 }}>
-                  <input required placeholder={t.form.name} />
-                  <input required type="tel" placeholder={t.form.phone} />
-                  <select required>{t.form.services.map((s, i) => <option key={i} value={i === 0 ? "" : s}>{s}</option>)}</select>
-                  <button type="submit" className="btn-cta" style={{ padding: "15px", fontSize: 16, justifyContent: "center", marginTop: 4, borderRadius: 8 }}>{t.form.btn} <ArrowRight size={17} /></button>
+                <form onSubmit={handleFormSubmit} style={{ display: "flex", flexDirection: "column", gap: 13 }}>
+                  <input required placeholder={t.form.name} value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+                  <input required type="tel" placeholder={t.form.phone} value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
+                  <select required value={formData.service} onChange={(e) => setFormData({...formData, service: e.target.value})}>
+                    {t.form.services.map((s, i) => <option key={i} value={i === 0 ? "" : s}>{s}</option>)}
+                  </select>
+                  <button type="submit" disabled={isSubmitting} className="btn-cta" style={{ padding: "15px", fontSize: 16, justifyContent: "center", marginTop: 4, borderRadius: 8, opacity: isSubmitting ? 0.7 : 1 }}>
+                    {isSubmitting ? (lang === "en" ? "Sending..." : "Enviando...") : t.form.btn} <ArrowRight size={17} />
+                  </button>
                   <p className="outfit" style={{ color: "rgba(255,255,255,0.4)", fontSize: 13, textAlign: "center", margin: 0 }}>{t.form.or} <a href="tel:6304497923" style={{ color: B.greenAccent, fontWeight: 700, textDecoration: "none" }}>(630) 449-7923</a></p>
                 </form>
               )}
