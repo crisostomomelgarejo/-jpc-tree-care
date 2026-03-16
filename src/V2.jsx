@@ -243,7 +243,7 @@ export default function App() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxscLn-zWAQ3j1NaRAwTb8PJ_4Ecq0eaPBOczGX_MOBMBTTl9YZdZUXyiT2J73UiCk5qw/exec";
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDWLJwvOfDy5SHVjt4G7wlw1Esflh6doAzBJObK3szpd_vonYiZaItsY40vMelwMExbg/exec";
 
     try {
       const response = await fetch(GOOGLE_SCRIPT_URL, {
